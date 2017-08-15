@@ -1,0 +1,27 @@
+/**
+ * Plugin Styles
+ *
+ * Created     August 15, 2017
+ * 
+ * @package    Product Report
+ * @author     Max Strukov
+ * @since      1.0.0
+ */
+
+
+#productreport_form h3 {
+	margin: 30px 0 15px;
+}
+#productreport_form table {
+	border: 1px solid #000;
+	margin-top: 20px;
+	border-collapse: collapse;
+}
+#productreport_form table td,
+#productreport_form table th {
+	padding: 5px;
+	border: 1px solid #000;
+}
+#productreport_form p input {
+	margin-right: 20px;
+}

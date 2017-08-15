@@ -1,0 +1,11 @@
+{
+    "name": "millermedia/productreport",
+    "description": "Product Report",
+    "type": "project",
+    "require": {},
+	"autoload": {
+		"psr-4": {
+		  "MillerMedia\\ProductReport\\": "classes/"
+		}
+	}
+}
