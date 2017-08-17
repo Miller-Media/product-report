@@ -32,13 +32,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php //echo $content ?>
 	<h3>Choose the date range</h3>
 	<form method="post">
-		<input type="date" name="start_date" value="<?php echo date('Y-m-d', strtotime("-2 days")); ?>"/>
+		<input type="date" name="start_date" value="<?php echo date('Y-m-d', strtotime("-1 month")); ?>"/>
 		<input type="date" name="end_date" value="<?php echo date('Y-m-d'); ?>"/>
 		<br/><br/>
-		<p>
-			<input type="submit" name="submit" class="button button-primary" value="View Report">
-			<input type="submit" name="download" class="button button-primary" value="Download Report as CSV" onclick="jQuery(this).closest('form').attr('target', '_blank'); return true;">
-		</p>
+		<p><input type="submit" name="download" class="button button-primary" value="Download Report as CSV" onclick="jQuery(this).closest('form').attr('target', '_blank'); return true;"></p>
 	</form>
 	<?php if ($rows): ?>
 		<table>
