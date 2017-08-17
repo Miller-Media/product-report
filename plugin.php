@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Product Report
  * Depends: lib-modern-framework
- * Description: It gives the ability to export orders as one per line in a report
+ * Description: It provides the ability to export orders as one per line in a report
  * Version: 1.0.1
  * Author: Max Strukov
  * Author URI: 
