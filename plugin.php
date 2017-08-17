@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: Product Report
+ * Plugin Name: Per Line Product Report (THM)
  * Depends: lib-modern-framework
  * Description: It provides the ability to export orders as one per line in a report
- * Version: 1.0.1
- * Author: Max Strukov
- * Author URI: 
+ * Version: 1.0.2
+ * Author: Max Strukov ( Miller Media )
+ * Author URI: www.millermedia.io
  */
  
 if ( ! defined( 'ABSPATH' ) ) {
