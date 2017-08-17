@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Per Line Product Report (THM)
+ * Plugin Name: Cal's Product Report (THM)
  * Depends: lib-modern-framework
- * Description: It provides the ability to export orders as one per line in a report
- * Version: 1.0.2
+ * Description: It provides the ability to export orders as one per line in a CSV report.
+ * Version: 1.0.3
  * Author: Max Strukov ( Miller Media )
  * Author URI: www.millermedia.io
  */

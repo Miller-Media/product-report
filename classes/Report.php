@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Report Class
  *
- * @Wordpress\AdminPage( title="Create Product Report", menu="Pruduct Report", slug="product_report", icon="dashicons-admin-generic" )
+ * @Wordpress\AdminPage( title="Create Product Report", menu="Cal's Order Report", slug="product_report", icon="dashicons-admin-generic" )
  */
 class Report extends Singleton
 {
