@@ -71,13 +71,15 @@ class Report extends Singleton
 	{
 		$this->setPlugin( $plugin ?: \MillerMedia\ProductReport\Plugin::instance() );
 		
-		$this->header_titles = array('Order#', 'Customer E-mail', 'Customer Address', 'Date', 'Line Items', 'Taxes', 'Shipping', 'Total');
+		$this->header_titles = array('Order#', 'Customer E-mail', 'Customer Address', 'Date', 'Status', 'Line Items', 'Taxes', 'Shipping', 'Total');
 	}
 	
 	public function do_index() {
 		
 		if (isset($_POST["start_date"]) && isset($_POST["end_date"])) {
-			$this->get_rows();
+			$start_date = date('Y-m-d', strtotime($_POST['start_date']));
+			$end_date = date('Y-m-d', strtotime($_POST['end_date']));
+			$this->get_rows($start_date, $end_date);
 			if (isset($_POST["download"])) {
 				// Assemble the filename for the report download
 				$filename =  'Product Sales - from '.date('Y-m-d', strtotime($_POST['start_date'])).' to '.date('Y-m-d', strtotime($_POST['end_date'])).'.csv';
@@ -112,13 +114,13 @@ class Report extends Singleton
 		echo $template_content;
 	}
 	
-	private function get_rows() {
+	private function get_rows($date_from, $date_to) {
 		global $wpdb;
-		$post_status = implode("','", array('wc-on-hold', 'wc-processing', 'wc-completed') );
-		$results = $wpdb->get_results( "SELECT ID, post_date FROM ".$wpdb->prefix."posts 
+		//$post_status = implode("','", array('wc-on-hold', 'wc-processing', 'wc-completed', 'wc-pending') );
+		$results = $wpdb->get_results( "SELECT ID, post_date,post_status FROM ".$wpdb->prefix."posts 
 		WHERE post_type = 'shop_order'
-		AND post_status IN ('".$post_status."')
-		AND post_date BETWEEN '".$_POST["start_date"]." 00:00:00' AND '".$_POST["end_date"]." 23:59:59'");
+		AND post_date BETWEEN '".$date_from." 00:00:00' AND '".$date_to." 23:59:59'");
+		
 		foreach ($results as $result) {
 			$row = array();
 			$row["order_id"] = $result->ID;
@@ -126,6 +128,7 @@ class Report extends Singleton
 			$row["email"] = $order->get_billing_email();
 			$row["address"] = $order->get_formatted_billing_address();
 			$row["date"] = date("Y-m-d", strtotime($result->post_date));
+			$row["status"] = $result->post_status;
 			
 			$order_items = $order->get_items();
 			$line_items = "";
