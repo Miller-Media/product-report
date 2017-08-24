@@ -25,3 +25,7 @@
 #productreport_form p input {
 	margin-right: 20px;
 }
+#productreport_form label {
+	position: relative;
+	top: -2px;
+}

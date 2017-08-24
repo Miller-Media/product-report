@@ -3,7 +3,7 @@
  * Plugin Name: Cal's Order Report (THM)
  * Depends: lib-modern-framework
  * Description: It provides the ability to export orders as one per line in a CSV report.
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Max Strukov ( Miller Media )
  * Author URI: www.millermedia.io
  */

@@ -34,7 +34,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<form method="post">
 		<input type="date" name="start_date" value="<?php echo date('Y-m-d', strtotime("-1 day")); ?>"/>
 		<input type="date" name="end_date" value="<?php echo date('Y-m-d'); ?>"/>
-		<br/><br/>
+		<br/>
+		<h4>Check order statuses</h4>
+		<?php foreach ($order_statuses as $status_key => $status_name): ?>
+			<input type="checkbox" name="order_status[]" value="<?php echo $status_key ?>" id="<?php echo $status_key ?>" checked><label for="<?php echo $status_key ?>"><?php echo $status_name ?></label><br/>
+		<?php endforeach;?>
+		<input type="checkbox" name="order_status[]" value="trash" id="trash"><label for="trash">Trash</label><br/><br/>
 		<p><input type="submit" name="download" class="button button-primary" value="Download Report as CSV" onclick="jQuery(this).closest('form').attr('target', '_blank'); return true;"></p>
 	</form>
 	<?php if ($rows): ?>
