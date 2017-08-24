@@ -124,7 +124,7 @@ class Report extends Singleton
 		foreach ($results as $result) {
 			$row = array();
 			$row["order_id"] = $result->ID;
-			$row["date"] = date("Y-m-d", strtotime($result->post_date));
+			$row["date"] = date("m/d/Y", strtotime($result->post_date));
 			$order = new \WC_Order($result->ID);
 			$row["email"] = $order->get_billing_email();
 			$row["customer"] = $order->get_billing_first_name()." ".$order->get_billing_last_name();
