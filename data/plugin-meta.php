@@ -6,6 +6,6 @@ return <<<'JSON'
     "name": "Product Report",
     "namespace": "MillerMedia\\ProductReport",
     "slug": "millermedia-productreport",
-    "version": "1.0.5"
+    "version": "1.0.6"
 }
 JSON;
