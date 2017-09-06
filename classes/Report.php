@@ -183,8 +183,12 @@ class Report extends Singleton
 			'posts_per_page' => -1
 		);
 		$total_sales = 0;
-		$total_wholesale_discount = 0;
-		$total_wholesale_sales = 0;
+		$wholesale_discount = 0;
+		$wholesale_sales = 0;
+		$member_discount = 0;
+		$member_sales = 0;
+		$sale_discount = 0;
+		$sale_sales = 0;
 		$the_query = new \WP_Query($args);
 		if ($the_query->have_posts()) :
 			while ($the_query->have_posts()) : $the_query->the_post();
@@ -195,17 +199,32 @@ class Report extends Singleton
 					$product = wc_get_product($item['product_id']);
 					$categories = wp_get_post_terms($product->get_id(), 'product_cat', array('fields'=>'ids'));
 					if (in_array(self::$wholesale_category, $categories)) {
-						$total_wholesale_discount += ($item['total']/0.9 - $item['total']);
-						$total_wholesale_sales += $item['total'];
+						$wholesale_discount += ($item['total']/0.9 - $item['total']);
+						$wholesale_sales += $item['total'];
+					}
+					$ssp_discount = wc_get_order_item_meta($item_id, 'ssp_discount', true);
+					if ($ssp_discount) {
+						$member_discount += ($item['total']/((100-$ssp_discount)/100) - $item['total']);
+						$member_sales += $item['total'];
+					} else {
+						$was_on_sale = wc_get_order_item_meta($item_id, 'on_sale', true);
+						$regular_price = wc_get_order_item_meta($item_id, 'regular_price', true);
+						if ($was_on_sale && $regular_price) {
+							$sale_discount += ($regular_price*$item['qty'] - $item['total']);
+							$sale_sales += $item['total'];
+						}
 					}
 				}
 			endwhile;
 		endif;
-		
 		$this->discount_rows = array(
 			array("Total Sales", get_woocommerce_currency_symbol().$total_sales),
-			array("Total Wholesale Discount", get_woocommerce_currency_symbol().$total_wholesale_discount),
-			array("Total Wholesale Sales", get_woocommerce_currency_symbol().$total_wholesale_sales)
+			array("Total Wholesale Discount", get_woocommerce_currency_symbol().$wholesale_discount),
+			array("Total Wholesale Sales", get_woocommerce_currency_symbol().$wholesale_sales),
+			array("Total Member Discount", get_woocommerce_currency_symbol().$member_discount),
+			array("Total Member Sales", get_woocommerce_currency_symbol().$member_sales),
+			array("Total Sale Discount", get_woocommerce_currency_symbol().$sale_discount),
+			array("Total Sale Sales", get_woocommerce_currency_symbol().$sale_sales)
 		);
 		
 	}
