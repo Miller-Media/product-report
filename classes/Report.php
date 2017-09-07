@@ -217,14 +217,18 @@ class Report extends Singleton
 				}
 			endwhile;
 		endif;
+		$total_discounts = $wholesale_discount+$member_discount+$sale_discount;
+		$currency = get_woocommerce_currency_symbol();
 		$this->discount_rows = array(
-			array("Total Sales", get_woocommerce_currency_symbol().$total_sales),
-			array("Total Wholesale Discount", get_woocommerce_currency_symbol().$wholesale_discount),
-			array("Total Wholesale Sales", get_woocommerce_currency_symbol().$wholesale_sales),
-			array("Total Member Discount", get_woocommerce_currency_symbol().$member_discount),
-			array("Total Member Sales", get_woocommerce_currency_symbol().$member_sales),
-			array("Total Sale Discount", get_woocommerce_currency_symbol().$sale_discount),
-			array("Total Sale Sales", get_woocommerce_currency_symbol().$sale_sales)
+			array("Total Sales", $currency.$total_sales),
+			array("Total Wholesale Discount", $currency.$wholesale_discount),
+			array("Total Wholesale Sales", $currency.$wholesale_sales),
+			array("Total Member Discount", $currency.$member_discount),
+			array("Total Member Sales", $currency.$member_sales),
+			array("Total Sale Discount", $currency.$sale_discount),
+			array("Total Sale Sales", $currency.$sale_sales),
+			array("Total Discounts", $currency.$total_discounts),
+			array("Total Sales With Discounts", $currency.($total_sales+$total_discounts))
 		);
 		
 	}
